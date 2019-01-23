@@ -18,7 +18,7 @@ const styles = theme => ({
 	textField: {
 		width: '100%',
 		borderRadius: 4,
-    border: '1px solid #ced4da',
+		marginBottom: 0
 	},
 	list: {
 		width: '100%',
@@ -38,6 +38,7 @@ export class PersonList extends Component {
 	};
 	render() {
 		const { classes } = this.props;
+		console.log(this.props)
 		return (
 			<div>
 				<TextField
@@ -48,6 +49,7 @@ export class PersonList extends Component {
 					onChange={this.handleChange('name')}
 					margin="normal"
 					variant="filled"
+					autoComplete="off"
 				/>
 				<List className={classes.list}>
 					<ListItem divider>

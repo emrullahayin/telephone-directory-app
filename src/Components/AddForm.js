@@ -10,9 +10,13 @@ const styles = theme => ({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		justifyContent: 'center', width: '100%',
+		justifyContent: 'center', 
 		maxWidth: 360,
-		margin: 'auto'
+		margin: 'auto',
+		backgroundColor: theme.palette.background.paper,
+		paddingLeft: 15,
+		paddingRight: 15,
+		marginTop: 15,
 	},
 	textField: {
 		width: '100%',
