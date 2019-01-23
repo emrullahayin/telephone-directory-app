@@ -10,12 +10,12 @@ const styles = theme => ({
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
-		justifyContent: 'center', 
+		justifyContent: 'center',
 		maxWidth: 360,
 		margin: 'auto',
 		backgroundColor: theme.palette.background.paper,
 		padding: 15,
-		marginTop: 15,
+		marginTop: 15
 	},
 	textField: {
 		width: '100%',
@@ -23,18 +23,18 @@ const styles = theme => ({
 		marginBottom: 0,
 		marginTop: 15,
 	},
-	mTop0:{
+	mTop0: {
 		marginTop: 0
 	},
 	button: {
-    marginTop: 15,
+		marginTop: 15,
 	},
 	iconSmall: {
-    fontSize: 20,
-  },
+		fontSize: 20,
+	},
 	leftIcon: {
-    marginRight: theme.spacing.unit,
-  }
+		marginRight: theme.spacing.unit,
+	}
 });
 
 export class AddForm extends Component {
@@ -55,7 +55,7 @@ export class AddForm extends Component {
 				<TextField
 					id="filled-name"
 					label="Enter a name"
-					className={classNames(classes.mTop0,classes.textField)}
+					className={classNames(classes.mTop0, classes.textField)}
 					value={this.state.name}
 					onChange={this.handleChange('name')}
 					margin="normal"
@@ -71,8 +71,8 @@ export class AddForm extends Component {
 					variant="filled"
 				/>
 				<Button variant="contained" size="large" color="primary" className={classes.button}>
-					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} /> 
-					 Add
+					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+					Add
       	</Button>
 			</form>
 		)
