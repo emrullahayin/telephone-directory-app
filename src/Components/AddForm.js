@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 
 const styles = theme => ({
 	container: {
@@ -21,6 +22,12 @@ const styles = theme => ({
 	},
 	button: {
     margin: theme.spacing.unit,
+	},
+	iconSmall: {
+    fontSize: 20,
+  },
+	leftIcon: {
+    marginRight: theme.spacing.unit,
   }
 });
 
@@ -57,8 +64,9 @@ export class AddForm extends Component {
 					margin="normal"
 					variant="filled"
 				/>
-				<Button variant="contained" color="primary" className={classes.button}>
-					Add
+				<Button variant="contained" size="large" color="primary" className={classes.button}>
+					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} /> 
+					 Add
       	</Button>
 			</form>
 		)
