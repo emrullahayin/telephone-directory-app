@@ -14,18 +14,20 @@ const styles = theme => ({
 		maxWidth: 360,
 		margin: 'auto',
 		backgroundColor: theme.palette.background.paper,
-		paddingLeft: 15,
-		paddingRight: 15,
+		padding: 15,
 		marginTop: 15,
 	},
 	textField: {
 		width: '100%',
 		border: '1px solid #ddd',
 		marginBottom: 0,
-		marginTop: 10,
+		marginTop: 15,
+	},
+	mTop0:{
+		marginTop: 0
 	},
 	button: {
-    margin: theme.spacing.unit,
+    marginTop: 15,
 	},
 	iconSmall: {
     fontSize: 20,
@@ -53,7 +55,7 @@ export class AddForm extends Component {
 				<TextField
 					id="filled-name"
 					label="Enter a name"
-					className={classes.textField}
+					className={classNames(classes.mTop0,classes.textField)}
 					value={this.state.name}
 					onChange={this.handleChange('name')}
 					margin="normal"
