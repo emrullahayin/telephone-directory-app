@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -48,6 +48,12 @@ export class AddForm extends Component {
 			[phone]: event.target.value
 		});
 	};
+	handleClick = event => {
+		console.log(this.state);
+		this.setState(
+      this.state
+    )
+	}
 	render() {
 		const { classes } = this.props;
 		return (
@@ -70,7 +76,13 @@ export class AddForm extends Component {
 					margin="normal"
 					variant="filled"
 				/>
-				<Button variant="contained" size="large" color="primary" className={classes.button}>
+				<Button
+					variant="contained"
+					size="large"
+					color="primary"
+					className={classes.button}
+					onClick={ () => this.handleClick() }
+				>
 					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
 					Add
       	</Button>
