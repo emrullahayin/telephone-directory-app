@@ -55,7 +55,7 @@ export class PersonList extends Component {
 						<ListItemText primary="Emrullah" secondary="05536203452" />
 					</ListItem>
 					<ListItem divider>
-						<ListItemText primary="Nurcan" secondary="05413890000" />
+						<ListItemText primary="Mustafa" secondary="05413890000" />
 					</ListItem>
 					<ListItem divider>
 						<ListItemText primary="Ali" secondary="02124125252" />
