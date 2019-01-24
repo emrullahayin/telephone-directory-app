@@ -29,7 +29,21 @@ const styles = theme => ({
 
 export class PersonList extends Component {
 	state = {
-		name: ''
+		name: '',
+		data: [
+			{
+				name: 'Emrullah',
+				number: '05536203452'
+			},
+			{
+				name: 'Mustafa',
+				number: '05413890000'
+			},
+			{
+				name: 'Ali',
+				number: '02124125252'
+			}
+		]
 	};
 	handleChange = name => event => {
 		this.setState({
@@ -38,6 +52,7 @@ export class PersonList extends Component {
 	};
 	render() {
 		const { classes } = this.props;
+		const { data } = this.state;
 		return (
 			<div>
 				<TextField
@@ -51,15 +66,14 @@ export class PersonList extends Component {
 					autoComplete="off"
 				/>
 				<List className={classes.list}>
-					<ListItem divider>
-						<ListItemText primary="Emrullah" secondary="05536203452" />
-					</ListItem>
-					<ListItem divider>
-						<ListItemText primary="Mustafa" secondary="05413890000" />
-					</ListItem>
-					<ListItem divider>
-						<ListItemText primary="Ali" secondary="02124125252" />
-					</ListItem>
+					{data.map((item, index) => {
+						return (
+							<ListItem divider key={index}>
+								<ListItemText primary={item.name} secondary={item.number} />
+							</ListItem>
+						)
+					})}
+
 				</List>
 			</div>
 		)
