@@ -32,14 +32,17 @@ export class PersonList extends Component {
 		name: '',
 		data: [
 			{
+				id: 1,
 				name: 'Emrullah',
 				number: '05536203452'
 			},
 			{
+				id: 2,
 				name: 'Mustafa',
 				number: '05413890000'
 			},
 			{
+				id: 3,
 				name: 'Ali',
 				number: '02124125252'
 			}
@@ -68,7 +71,7 @@ export class PersonList extends Component {
 				<List className={classes.list}>
 					{data.map((item, index) => {
 						return (
-							<ListItem divider key={index}>
+							<ListItem divider key={item.id}>
 								<ListItemText primary={item.name} secondary={item.number} />
 							</ListItem>
 						)
