@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -39,21 +39,31 @@ const styles = theme => ({
 
 export class AddForm extends Component {
 	state = {
-		name: '',
-		phone: ''
+		fields: {
+			name: '',
+			phone: ''
+		},
+		errors: {
+			name: false,
+			phone: false
+		}
 	};
-	handleChange = (name, phone) => event => {
-		this.setState({
-			[name]: event.target.value,
-			[phone]: event.target.value
-		});
+
+	handleChange = name => event => {
+		let { fields, errors } = this.state;
+		fields[name] = event.target.value;
+		fields[name].length === 0 ? errors[name] = true : errors[name] = false;
+		this.setState({ fields });
 	};
-	handleClick = event => {
-		console.log(this.state);
-		this.setState(
-      this.state
-    )
-	}
+
+	handleClick = () => {
+		let { fields, errors } = this.state;
+		for (let key in fields) {
+			fields[key].length === 0 ? errors[key] = true : errors[key] = false;
+		}
+		this.setState({ errors });
+	};
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -66,6 +76,8 @@ export class AddForm extends Component {
 					onChange={this.handleChange('name')}
 					margin="normal"
 					variant="filled"
+					error={this.state.errors['name']}
+					autoComplete="off"
 				/>
 				<TextField
 					id="filled-name"
@@ -75,13 +87,15 @@ export class AddForm extends Component {
 					onChange={this.handleChange('phone')}
 					margin="normal"
 					variant="filled"
+					error={this.state.errors['phone']}
+					autoComplete="off"
 				/>
 				<Button
 					variant="contained"
 					size="large"
 					color="primary"
 					className={classes.button}
-					onClick={ () => this.handleClick() }
+					onClick={this.handleClick}
 				>
 					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
 					Add
@@ -90,5 +104,7 @@ export class AddForm extends Component {
 		)
 	}
 }
-
+AddForm.propTypes = {
+	classes: PropTypes.object.isRequired,
+};
 export default withStyles(styles)(AddForm);
