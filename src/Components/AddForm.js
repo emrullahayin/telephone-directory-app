@@ -61,12 +61,14 @@ export class AddForm extends Component {
 	handleClick = () => {
 		let { fields, errors } = this.state,
 			isError = false;
+
 		for (let key in fields) {
 			fields[key].length === 0 ? errors[key] = true : errors[key] = false;
+			if (errors[key] === true) isError = true;
 		}
-		if (isError) {
-			this.props.addContact();
-		}
+
+		if (!isError) this.props.addContact();
+
 		this.setState({ errors });
 	};
 
