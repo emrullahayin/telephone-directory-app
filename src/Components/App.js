@@ -23,7 +23,6 @@ class App extends Component {
 
   addContact = (contact) => {
     const { data } = this.state;
-    console.log(contact);
     data.push(contact);
     this.setState({data});
   }
