@@ -67,7 +67,11 @@ export class AddForm extends Component {
 			if (errors[key] === true) isError = true;
 		}
 
-		if (!isError) this.props.addContact();
+		if (!isError) {
+			this.props.addContact({
+				...this.state
+			});
+		}
 
 		this.setState({ errors });
 	};

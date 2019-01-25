@@ -24,8 +24,8 @@ class App extends Component {
     ]
   };
   
-  addContact = () => {
-    console.log("addContact Func")
+  addContact = (contact) => {
+		console.log(contact)
   }
   
   render() {
