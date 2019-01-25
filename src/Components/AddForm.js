@@ -48,7 +48,9 @@ export class AddForm extends Component {
 			phone: false
 		}
 	};
-
+	static propTypes = {
+		addContact: PropTypes.func,
+	};
 	handleChange = name => event => {
 		let { fields, errors } = this.state;
 		fields[name] = event.target.value;
@@ -57,9 +59,13 @@ export class AddForm extends Component {
 	};
 
 	handleClick = () => {
-		let { fields, errors } = this.state;
+		let { fields, errors } = this.state,
+			isError = false;
 		for (let key in fields) {
 			fields[key].length === 0 ? errors[key] = true : errors[key] = false;
+		}
+		if (isError) {
+			this.props.addContact();
 		}
 		this.setState({ errors });
 	};

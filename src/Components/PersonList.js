@@ -29,54 +29,37 @@ const styles = theme => ({
 
 export class PersonList extends Component {
 	state = {
-		name: '',
-		data: [
-			{
-				id: 1,
-				name: 'Emrullah',
-				number: '05536203452'
-			},
-			{
-				id: 2,
-				name: 'Mustafa',
-				number: '05413890000'
-			},
-			{
-				id: 3,
-				name: 'Ali',
-				number: '02124125252'
-			}
-		]
-	};
+    name: '',
+	}
+	
 	handleChange = name => event => {
 		this.setState({
 			[name]: event.target.value,
 		});
 	};
+	
 	render() {
-		const { classes } = this.props;
-		const { data } = this.state;
+		const { classes, contacts, text } = this.props;
 		return (
 			<div>
 				<TextField
 					id="filled-name"
 					label="Filter by name or phone"
 					className={classes.textField}
-					value={this.state.name}
-					onChange={this.handleChange('name')}
+					value={text}
+					onChange={this.handleChange.bind('text')}
 					margin="normal"
 					variant="filled"
 					autoComplete="off"
 				/>
 				<List className={classes.list}>
-					{data.map((item, index) => {
+					{contacts.map((item, index) => {
 						return (
-							<ListItem divider key={item.id}>
+							<ListItem button divider key={index}>
 								<ListItemText primary={item.name} secondary={item.number} />
 							</ListItem>
 						)
 					})}
-
 				</List>
 			</div>
 		)
