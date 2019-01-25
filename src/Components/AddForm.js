@@ -69,7 +69,7 @@ export class AddForm extends Component {
 
 		if (!isError) {
 			this.props.addContact({
-				...this.state
+				...fields
 			});
 		}
 
