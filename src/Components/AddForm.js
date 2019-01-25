@@ -41,11 +41,11 @@ export class AddForm extends Component {
 	state = {
 		fields: {
 			name: '',
-			phone: ''
+			number: ''
 		},
 		errors: {
 			name: false,
-			phone: false
+			number: false
 		}
 	};
 	static propTypes = {
@@ -95,11 +95,11 @@ export class AddForm extends Component {
 					id="filled-name"
 					label="Enter a phone"
 					className={classes.textField}
-					value={this.state.phone}
-					onChange={this.handleChange('phone')}
+					value={this.state.number}
+					onChange={this.handleChange('number')}
 					margin="normal"
 					variant="filled"
-					error={this.state.errors['phone']}
+					error={this.state.errors['number']}
 					autoComplete="off"
 				/>
 				<Button

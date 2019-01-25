@@ -29,7 +29,7 @@ const styles = theme => ({
 
 export class PersonList extends Component {
 	state = {
-    name: '',
+		name: '',
 	}
 	
 	handleChange = name => event => {
