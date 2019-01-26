@@ -11,11 +11,11 @@ export class Contacts extends Component {
   render() {
     return (
       <div>
-        <PersonList
-          contacts={this.props.contacts}
-        />
         <AddForm
           addContact={this.props.addContact}
+        />
+        <PersonList
+          contacts={this.props.contacts}
         />
       </div>
     )
