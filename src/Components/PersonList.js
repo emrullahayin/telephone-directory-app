@@ -43,10 +43,13 @@ export class PersonList extends Component {
 		const { classes, contacts } = this.props;
 		
 		const filteredContacts = contacts.filter(contact => {
-			return contact.name.toLowerCase().indexOf(
-				this.state.text.toLowerCase()
-			) !== -1
+			const query = this.state.text.toLowerCase();
+			return (
+				contact.name.toLowerCase().indexOf(query)>= 0 ||
+				contact.number.toLowerCase().indexOf(query)>= 0
+			)
 		});
+		
 		return (
 			<div>
 				<TextField
