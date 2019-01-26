@@ -41,11 +41,11 @@ export class AddForm extends Component {
 	state = {
 		fields: {
 			name: '',
-			number: ''
+			number: '',
 		},
 		errors: {
 			name: false,
-			number: false
+			number: false,
 		}
 	};
 
@@ -74,7 +74,10 @@ export class AddForm extends Component {
 				...fields
 			});
 		}
-		this.setState({ errors });
+		
+		this.setState({
+			errors
+		});
 	};
 
 	render() {

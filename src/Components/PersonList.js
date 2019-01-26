@@ -30,30 +30,37 @@ const styles = theme => ({
 export class PersonList extends Component {
 	state = {
 		name: '',
+		text: '',
 	}
-	
+
 	handleChange = name => event => {
 		this.setState({
 			[name]: event.target.value,
 		});
 	};
-	
+
 	render() {
-		const { classes, contacts, text } = this.props;
+		const { classes, contacts } = this.props;
+		
+		const filteredContacts = contacts.filter(contact => {
+			return contact.name.toLowerCase().indexOf(
+				this.state.text.toLowerCase()
+			) !== -1
+		});
 		return (
 			<div>
 				<TextField
 					id="filled-name"
 					label="Filter by name or phone"
 					className={classes.textField}
-					value={text}
-					onChange={this.handleChange.bind('text')}
+					value={this.state.text}
+					onChange={this.handleChange('text')}
 					margin="normal"
 					variant="filled"
 					autoComplete="off"
 				/>
 				<List className={classes.list}>
-					{contacts.map((item, index) => {
+					{filteredContacts.map((item, index) => {
 						return (
 							<ListItem button divider key={index}>
 								<ListItemText primary={item.name} secondary={item.number} />
