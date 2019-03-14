@@ -73,7 +73,7 @@ export class PersonList extends Component {
 					{filteredContacts.map((item, index) => {
 						return (
 							<ListItem button divider key={index}>
-								<ListItemText primary={item.name} secondary={item.number} />
+								<ListItemText primary={item.name + item.id} secondary={item.number} />
 								<Tooltip title="Delete">
 									<IconButton aria-label="Delete" onClick={this.handleDelete(item.id)}>
 										<DeleteIcon />

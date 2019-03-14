@@ -40,6 +40,7 @@ const styles = theme => ({
 export class AddForm extends Component {
 	state = {
 		fields: {
+			id: 0,
 			name: '',
 			number: '',
 		},
@@ -51,10 +52,13 @@ export class AddForm extends Component {
 
 	static propTypes = {
 		addContact: PropTypes.func,
+		contacts: PropTypes.object,
 	};
 
 	handleChange = name => event => {
+		const { contacts } = this.props;
 		let { fields, errors } = this.state;
+		fields["id"] = contacts.length;
 		fields[name] = event.target.value;
 		fields[name].length === 0 ? errors[name] = true : errors[name] = false;
 		this.setState({ fields });
@@ -74,7 +78,6 @@ export class AddForm extends Component {
 				...fields
 			});
 		}
-
 		this.setState({
 			errors
 		});
@@ -82,7 +85,6 @@ export class AddForm extends Component {
 
 	render() {
 		const { classes } = this.props;
-		console.log('this.props', this.props)
 		return (
 			<form className={classes.container}>
 				<TextField

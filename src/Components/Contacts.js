@@ -13,6 +13,7 @@ export class Contacts extends Component {
     return (
       <div>
         <AddForm
+          contacts={this.props.contacts}
           addContact={this.props.addContact}
         />
         <PersonList
