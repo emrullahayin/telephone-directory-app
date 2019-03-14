@@ -56,15 +56,14 @@ export class AddForm extends Component {
 	};
 
 	handleChange = name => event => {
-		const { contacts } = this.props;
 		let { fields, errors } = this.state;
-		fields["id"] = contacts.length;
 		fields[name] = event.target.value;
 		fields[name].length === 0 ? errors[name] = true : errors[name] = false;
 		this.setState({ fields });
 	};
 
 	handleClick = () => {
+		const { contacts } = this.props;
 		let { fields, errors } = this.state,
 			isError = false;
 
@@ -74,6 +73,7 @@ export class AddForm extends Component {
 		}
 
 		if (!isError) {
+			fields["id"] = contacts.length;
 			this.props.addContact({
 				...fields
 			});
