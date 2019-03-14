@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 //import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
 	container: {
@@ -29,27 +32,31 @@ const styles = theme => ({
 
 export class PersonList extends Component {
 	state = {
-		name: '',
 		text: '',
 	}
-
+	static propTypes = {
+		deleteContact: PropTypes.func,
+	};
 	handleChange = name => event => {
 		this.setState({
 			[name]: event.target.value,
 		});
 	};
-
+	handleDelete = (id) => event => {
+		console.log('id:', id)
+		this.props.deleteContact(id)
+	}
 	render() {
 		const { classes, contacts } = this.props;
-		
+
 		const filteredContacts = contacts.filter(contact => {
 			const query = this.state.text.toLowerCase();
 			return (
-				contact.name.toLowerCase().indexOf(query)>= 0 ||
-				contact.number.toLowerCase().indexOf(query)>= 0
+				contact.name.toLowerCase().indexOf(query) >= 0 ||
+				contact.number.toLowerCase().indexOf(query) >= 0
 			)
 		});
-		
+
 		return (
 			<div>
 				<TextField
@@ -67,6 +74,11 @@ export class PersonList extends Component {
 						return (
 							<ListItem button divider key={index}>
 								<ListItemText primary={item.name} secondary={item.number} />
+								<Tooltip title="Delete">
+									<IconButton aria-label="Delete" onClick={this.handleDelete(item.id)}>
+										<DeleteIcon />
+									</IconButton>
+								</Tooltip>
 							</ListItem>
 						)
 					})}

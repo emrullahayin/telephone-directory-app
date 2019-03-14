@@ -74,7 +74,7 @@ export class AddForm extends Component {
 				...fields
 			});
 		}
-		
+
 		this.setState({
 			errors
 		});
@@ -82,6 +82,7 @@ export class AddForm extends Component {
 
 	render() {
 		const { classes } = this.props;
+		console.log('this.props', this.props)
 		return (
 			<form className={classes.container}>
 				<TextField
@@ -115,7 +116,7 @@ export class AddForm extends Component {
 				>
 					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
 					Add
-      	</Button>
+      			</Button>
 			</form>
 		)
 	}

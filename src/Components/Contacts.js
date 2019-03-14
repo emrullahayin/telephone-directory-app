@@ -7,6 +7,7 @@ export class Contacts extends Component {
   static propTypes = {
     contacts: PropTypes.array.isRequired,
     addContact: PropTypes.func,
+    deleteContact: PropTypes.func,
   };
   render() {
     return (
@@ -16,6 +17,7 @@ export class Contacts extends Component {
         />
         <PersonList
           contacts={this.props.contacts}
+          deleteContact={this.props.deleteContact}
         />
       </div>
     )
