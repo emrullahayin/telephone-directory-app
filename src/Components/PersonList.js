@@ -43,7 +43,6 @@ export class PersonList extends Component {
 		});
 	};
 	handleDelete = (id) => event => {
-		console.log('id:', id)
 		this.props.deleteContact(id)
 	}
 	render() {
