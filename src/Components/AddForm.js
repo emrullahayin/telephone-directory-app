@@ -81,7 +81,7 @@ export class AddForm extends Component {
 
 	handleClick = () => {
 		const { contacts } = this.props;
-		let { fields, errors } = this.state,
+		let { fields, errors, open } = this.state,
 			isError = false;
 
 		for (let key in fields) {
@@ -90,13 +90,15 @@ export class AddForm extends Component {
 		}
 
 		if (!isError) {
+			open === true && (open = false);
 			fields["id"] = contacts.length;
 			this.props.addContact({
 				...fields
 			});
 		}
 		this.setState({
-			errors
+			errors,
+			open
 		});
 	};
 
@@ -105,7 +107,7 @@ export class AddForm extends Component {
 		return (
 
 			<form className={classes.container}>
-				<Button variant="contained"  color="inherit" className={classes.button} onClick={this.handleClickOpen}>
+				<Button variant="contained" color="inherit" className={classes.button} onClick={this.handleClickOpen}>
 					Add New Person
 				</Button>
 
