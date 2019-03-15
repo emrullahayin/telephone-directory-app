@@ -6,7 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import NumberFormat from 'react-number-format';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { Hidden } from '@material-ui/core';
 
 const styles = theme => ({
 	container: {
@@ -15,7 +19,6 @@ const styles = theme => ({
 		justifyContent: 'center',
 		maxWidth: 360,
 		margin: 'auto',
-		backgroundColor: theme.palette.background.paper,
 		padding: 15,
 		marginTop: 15,
 	},
@@ -29,13 +32,16 @@ const styles = theme => ({
 		marginTop: 0
 	},
 	button: {
-		marginTop: 15,
+		margin: theme.spacing.unit,
 	},
 	iconSmall: {
 		fontSize: 20,
 	},
 	leftIcon: {
 		marginRight: theme.spacing.unit,
+	},
+	dialogContent: {
+		overflow: 'hidden',
 	}
 });
 
@@ -49,7 +55,16 @@ export class AddForm extends Component {
 		errors: {
 			name: false,
 			number: false,
-		}
+		},
+		open: false,
+	};
+
+	handleClickOpen = () => {
+		this.setState({ open: true });
+	};
+
+	handleClose = () => {
+		this.setState({ open: false });
 	};
 
 	static propTypes = {
@@ -90,41 +105,60 @@ export class AddForm extends Component {
 		return (
 
 			<form className={classes.container}>
+				<Button variant="contained"  color="inherit" className={classes.button} onClick={this.handleClickOpen}>
+					Add New Person
+				</Button>
 
-				<TextField
-					id="filled-name"
-					label="Enter a name"
-					className={classNames(classes.mTop0, classes.textField)}
-					value={this.state.name}
-					onChange={this.handleChange('name')}
-					margin="normal"
-					variant="filled"
-					error={this.state.errors['name']}
-					autoComplete="off" />
+				<Dialog
+					open={this.state.open}
+					onClose={this.handleClose}
+					aria-labelledby="form-dialog-title">
+					<DialogTitle id="form-dialog-title">Add New Person</DialogTitle>
+					<DialogContent className={classes.dialogContent}>
+						<TextField
+							id="filled-name"
+							label="Enter a name"
+							className={classNames(classes.mTop0, classes.textField)}
+							value={this.state.name}
+							onChange={this.handleChange('name')}
+							margin="normal"
+							variant="filled"
+							error={this.state.errors['name']}
+							autoComplete="off" />
 
-				<NumberFormat
-					customInput={TextField}
-					format="+90 (###) ### ## ##"
-					mask="_"
-					id="filled-phone"
-					label="Enter a phone 5**"
-					className={classes.textField}
-					margin="normal"
-					variant="filled"
-					onChange={this.handleChange('number')}
-					value={this.state.number}
-					error={this.state.errors['number']}
-					autoComplete="off" />
+						<NumberFormat
+							customInput={TextField}
+							format="+90 (###) ### ## ##"
+							mask="_"
+							id="filled-phone"
+							label="Enter a phone 5**"
+							className={classes.textField}
+							margin="normal"
+							variant="filled"
+							onChange={this.handleChange('number')}
+							value={this.state.number}
+							error={this.state.errors['number']}
+							autoComplete="off" />
+					</DialogContent>
+					<DialogActions>
+						<Button
+							onClick={this.handleClose}
+							color="primary"
+							className={classes.button}>
+							Cancel
+            			</Button>
+						<Button
+							variant="contained"
+							size="large"
+							color="primary"
+							className={classes.button}
+							onClick={this.handleClick} >
+							<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
+							Add
+      					</Button>
+					</DialogActions>
+				</Dialog>
 
-				<Button
-					variant="contained"
-					size="large"
-					color="primary"
-					className={classes.button}
-					onClick={this.handleClick} >
-					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
-					Add
-      			</Button>
 			</form>
 		)
 	}
