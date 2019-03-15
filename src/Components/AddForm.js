@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import NumberFormat from 'react-number-format';
+
 
 const styles = theme => ({
 	container: {
@@ -86,7 +88,9 @@ export class AddForm extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
+
 			<form className={classes.container}>
+
 				<TextField
 					id="filled-name"
 					label="Enter a name"
@@ -96,26 +100,28 @@ export class AddForm extends Component {
 					margin="normal"
 					variant="filled"
 					error={this.state.errors['name']}
-					autoComplete="off"
-				/>
-				<TextField
-					id="filled-name"
-					label="Enter a phone"
+					autoComplete="off" />
+
+				<NumberFormat
+					customInput={TextField}
+					format="+90 (###) ### ## ##"
+					mask="_"
+					id="filled-phone"
+					label="Enter a phone 5**"
 					className={classes.textField}
-					value={this.state.number}
-					onChange={this.handleChange('number')}
 					margin="normal"
 					variant="filled"
+					onChange={this.handleChange('number')}
+					value={this.state.number}
 					error={this.state.errors['number']}
-					autoComplete="off"
-				/>
+					autoComplete="off" />
+
 				<Button
 					variant="contained"
 					size="large"
 					color="primary"
 					className={classes.button}
-					onClick={this.handleClick}
-				>
+					onClick={this.handleClick} >
 					<SaveIcon className={classNames(classes.leftIcon, classes.iconSmall)} />
 					Add
       			</Button>
