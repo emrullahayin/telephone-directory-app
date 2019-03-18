@@ -10,7 +10,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Hidden } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
 	container: {
@@ -42,7 +44,10 @@ const styles = theme => ({
 	},
 	dialogContent: {
 		overflow: 'hidden',
-	}
+	},
+	close: {
+		padding: theme.spacing.unit / 2,
+	},
 });
 
 export class AddForm extends Component {
@@ -57,13 +62,18 @@ export class AddForm extends Component {
 			number: false,
 		},
 		open: false,
+		snackbarOpen: false
 	};
 
-	handleClickOpen = () => {
+	handleSnackClose = () => {
+		this.setState({ snackbarOpen: false });
+	};
+
+	handleModalClick = () => {
 		this.setState({ open: true });
 	};
 
-	handleClose = () => {
+	handleModalClose = () => {
 		this.setState({ open: false });
 	};
 
@@ -81,7 +91,7 @@ export class AddForm extends Component {
 
 	handleClick = () => {
 		const { contacts } = this.props;
-		let { fields, errors, open } = this.state,
+		let { fields, errors, open, snackbarOpen } = this.state,
 			isError = false;
 
 		for (let key in fields) {
@@ -92,28 +102,51 @@ export class AddForm extends Component {
 		if (!isError) {
 			open === true && (open = false);
 			fields["id"] = contacts.length;
+			snackbarOpen = true;
 			this.props.addContact({
 				...fields
 			});
 		}
 		this.setState({
 			errors,
-			open
+			open,
+			snackbarOpen
 		});
 	};
 
 	render() {
 		const { classes } = this.props;
-		return (
-
+		const { name, number, errors, open, snackbarOpen } = this.state;
+		return <div>
+			<Snackbar
+				anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+				open={snackbarOpen}
+				autoHideDuration={2000}
+				onClose={this.handleSnackClose}
+				ContentProps={{
+					'aria-describedby': 'message-id',
+				}}
+				message={<span id="message-id">Person Successfully added</span>}
+				action={[
+					<IconButton
+						key="close"
+						aria-label="Close"
+						color="inherit"
+						className={classes.close}
+						onClick={this.handleSnackClose}
+					>
+						<CloseIcon />
+					</IconButton>,
+				]}
+			/>
 			<form className={classes.container}>
-				<Button variant="contained" color="inherit" className={classes.button} onClick={this.handleClickOpen}>
+				<Button variant="contained" color="inherit" className={classes.button} onClick={this.handleModalClick}>
 					Add New Person
 				</Button>
 
 				<Dialog
-					open={this.state.open}
-					onClose={this.handleClose}
+					open={open}
+					onClose={this.handleModalClose}
 					aria-labelledby="form-dialog-title">
 					<DialogTitle id="form-dialog-title">Add New Person</DialogTitle>
 					<DialogContent className={classes.dialogContent}>
@@ -121,11 +154,11 @@ export class AddForm extends Component {
 							id="filled-name"
 							label="Enter a name"
 							className={classNames(classes.mTop0, classes.textField)}
-							value={this.state.name}
+							value={name}
 							onChange={this.handleChange('name')}
 							margin="normal"
 							variant="filled"
-							error={this.state.errors['name']}
+							error={errors['name']}
 							autoComplete="off" />
 
 						<NumberFormat
@@ -138,13 +171,13 @@ export class AddForm extends Component {
 							margin="normal"
 							variant="filled"
 							onChange={this.handleChange('number')}
-							value={this.state.number}
-							error={this.state.errors['number']}
+							value={number}
+							error={errors['number']}
 							autoComplete="off" />
 					</DialogContent>
 					<DialogActions>
 						<Button
-							onClick={this.handleClose}
+							onClick={this.handleModalClose}
 							color="primary"
 							className={classes.button}>
 							Cancel
@@ -162,7 +195,8 @@ export class AddForm extends Component {
 				</Dialog>
 
 			</form>
-		)
+
+		</div>
 	}
 }
 AddForm.propTypes = {
